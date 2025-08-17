@@ -10,7 +10,7 @@ function newTimer() {
     console.log("New timer created");
 
     var curTime = 0;
-    // Anonymous function so function isn't called immediately
+    // Anonymous function so function return isn't used, the function with the call is used instead
     setInterval(function() {curTime = timer(curTime);}, 1000);
 
     
