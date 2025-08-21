@@ -1,12 +1,11 @@
 function newTimer() {
 
     // Create a new timer and append it to the timers section
-    const newDiv = document.createElement("div");
-    const newContent = document.createTextNode("New Timer")
-    newDiv.appendChild(newContent);
-
+    const newTimerNameDiv = document.createElement("div");
+    const newContent = document.createTextNode("New Timer Name")
+    newTimerNameDiv.appendChild(newContent);
     const currentDiv = document.getElementById("timers");
-    document.body.insertBefore(newDiv, currentDiv); 
+    document.body.insertBefore(newTimerNameDiv, currentDiv); 
     console.log("New timer created");
 
     var curTime = 0;
@@ -16,6 +15,9 @@ function newTimer() {
     
     function timer(curTime) {
         console.log(curTime);
+        // Update the timer display
+        const timerDisplay = document.getElementById("timers_time");
+        timerDisplay.textContent = curTime;
         return curTime += 1;
     }
 }
