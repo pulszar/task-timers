@@ -1,6 +1,9 @@
 var numOfTimers = 0;
+const map = new Map();
+intervalID = null;
 
 function newTimer() {
+    clearInterval(intervalID);
 
     // Create a new timer and append it to the timers section
     const newTimerNameDiv = document.createElement("div");
@@ -13,17 +16,18 @@ function newTimer() {
     
     const newTimerHeader = document.createElement("h1");
     newTimerHeader.setAttribute("id", `timer${numOfTimers}`);
-    var curTime = 0;
-    const newTime = document.createTextNode(curTime);
+    const newTime = document.createTextNode(0);
     newTimerHeader.appendChild(newTime);
     curTimerHeader = document.getElementById("timers"); // Appending at the timers div, not the previous timer currently 
     document.body.insertBefore(newTimerHeader, curTimerHeader);
 
 
-    // Anonymous function so function return isn't used, the function with the call is used instead
-    setInterval(function() {curTime = timer(curTime);}, 1000);
+    curTime = 0;
 
-    
+
+    // Anonymous function so function return isn't used, the function with the call is used instead
+    intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
+
     function timer(curTime) {
         console.log("current timer is" + `timer${numOfTimers}`)
         console.log(curTime);
