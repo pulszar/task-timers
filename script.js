@@ -1,5 +1,5 @@
 var numOfTimers = 0;
-const map = new Map();
+// const map = new Map();
 intervalID = null;
 
 function newTimer() {
@@ -9,21 +9,22 @@ function newTimer() {
     const newTimerNameDiv = document.createElement("div");
     const newTimerName = document.createTextNode("New Timer Name")
     newTimerNameDiv.appendChild(newTimerName);
-    const currentTimerNameDiv = document.getElementById("timers");
-    document.body.insertBefore(newTimerNameDiv, currentTimerNameDiv); 
+
+    const parentTimerNameDiv = document.getElementById("timer").parentNode;
+    const timerNameDiv = document.getElementById("timer")
+    parentTimerNameDiv.insertBefore(newTimerNameDiv, timerNameDiv);
     console.log("New timer created");
 
     
-    const newTimerHeader = document.createElement("h1");
-    newTimerHeader.setAttribute("id", `timer${numOfTimers}`);
-    const newTime = document.createTextNode(0);
-    newTimerHeader.appendChild(newTime);
-    curTimerHeader = document.getElementById("timers"); // Appending at the timers div, not the previous timer currently 
-    document.body.insertBefore(newTimerHeader, curTimerHeader);
+    const newTimerPara = document.createElement("p");
+    newTimerPara.setAttribute("id", `timer${numOfTimers}`);
+    const newTime = document.createTextNode("0");
+    newTimerPara.appendChild(newTime);
 
+    curTimerHeader = document.getElementById("timer"); // Appending at the timers div, not the previous timer currently 
+    parentTimerNameDiv.insertBefore(newTimerPara, timerNameDiv);
 
     curTime = 0;
-
 
     // Anonymous function so function return isn't used, the function with the call is used instead
     intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
