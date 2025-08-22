@@ -1,0 +1,13 @@
+body{
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.timerDisplay {
+    border: 2px solid black;
+    padding: 10px;
+    width: 200px;
+    margin: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
