@@ -9,19 +9,23 @@ function newTimer() {
     const newTimerNameDiv = document.createElement("div");
     const newTimerName = document.createTextNode("New Timer Name")
     newTimerNameDiv.appendChild(newTimerName);
+    newTimerNameDiv.setAttribute("id", `timerName${numOfTimers}`);
+    // console.log("Creating new timer with ID: " + `timerName${numOfTimers}`);
 
+    // Insert the new timer name before the current timer name
     const parentTimerNameDiv = document.getElementById("timer").parentNode;
     const timerNameDiv = document.getElementById("timer")
     parentTimerNameDiv.insertBefore(newTimerNameDiv, timerNameDiv);
     console.log("New timer created");
 
-    
+    // Create a new timer display element  
     const newTimerPara = document.createElement("p");
     newTimerPara.setAttribute("id", `timer${numOfTimers}`);
     const newTime = document.createTextNode("0");
     newTimerPara.appendChild(newTime);
 
-    curTimerHeader = document.getElementById("timer"); // Appending at the timers div, not the previous timer currently 
+    // Insert the new timer display before the current timer display
+    curTimerHeader = document.getElementById("timer"); 
     parentTimerNameDiv.insertBefore(newTimerPara, timerNameDiv);
 
     curTime = 0;
