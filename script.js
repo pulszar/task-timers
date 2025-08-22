@@ -28,6 +28,21 @@ function newTimer() {
     startButton.textContent = "Start";
     timerNameDiv.appendChild(startButton);
 
+    // Create a new stop button
+    const stopButton = document.createElement("button");
+    stopButton.setAttribute("id", `stopTimer${numOfTimers}`);
+    stopButton.setAttribute("onclick", `stopTimer(${numOfTimers})`);
+    stopButton.textContent = "Stop";
+    timerNameDiv.appendChild(stopButton);
+
+    // Create a new reset button
+    const resetButton = document.createElement("button");
+    resetButton.setAttribute("id", `resetTimer${numOfTimers}`);
+    resetButton.setAttribute("onclick", `resetTimer(${numOfTimers})`);
+    resetButton.textContent = "Reset";
+    timerNameDiv.appendChild(resetButton);
+
+
     numOfTimers++;
 }
 
@@ -49,4 +64,16 @@ function startTimer(timerIndex) {
         return curTime += 1;
     }
     console.log("Number of timers: " + (numOfTimers + 1));
+}
+
+function stopTimer(timerIndex) {
+    clearInterval(intervalID);
+    console.log("Stopped timer " + timerIndex);
+}
+
+function resetTimer(timerIndex) {
+    clearInterval(intervalID);
+    const curTimerHeader = document.getElementById(`timer${timerIndex}`);
+    curTimerHeader.textContent = "0";
+    console.log("Reset timer " + timerIndex);
 }
