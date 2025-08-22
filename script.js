@@ -14,9 +14,16 @@ function newTimer() {
     
     // Create a new timer display paragraph
     const timerDisplayPara = document.createElement("p"); 
-    timerNameDiv.appendChild(timerDisplayPara);
     timerDisplayPara.setAttribute("id", `timer${numOfTimers}`);
     timerDisplayPara.textContent = "0";
+    timerNameDiv.appendChild(timerDisplayPara);
+    
+    // Create a new start button
+    const startButton = document.createElement("button");
+    startButton.setAttribute("id", `startTimer${numOfTimers}`);
+    startButton.textContent = "Start";
+    timerNameDiv.appendChild(startButton);
+
 
     curTime = 0;
 
