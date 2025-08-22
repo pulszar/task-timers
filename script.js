@@ -6,13 +6,14 @@ function newTimer() {
     const timersDiv = document.getElementById("timers");
     const timerNameDiv = document.createElement("div");
     timerNameDiv.setAttribute("id", `timerName${numOfTimers}`);
+    timerNameDiv.setAttribute("class", "timerDisplay");
     timersDiv.appendChild(timerNameDiv);
 
     // // Create a new input field for the timer name
     const timerNameInput = document.createElement("input");
     timerNameInput.setAttribute("type", "text");
     timerNameInput.setAttribute("id", `timerNameInput${numOfTimers}`);
-    timerNameInput.setAttribute("value", `Timer ${numOfTimers}`);
+    timerNameInput.setAttribute("value", `Timer ${numOfTimers + 1}`);
     timerNameDiv.appendChild(timerNameInput);
     
     // Create a new timer display paragraph
