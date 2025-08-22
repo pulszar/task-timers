@@ -5,22 +5,18 @@ intervalID = null;
 function newTimer() {
     clearInterval(intervalID);
 
-    const timers = document.getElementById("timers");
-
-    let element = document.getElementById("timer");
-    console.log(element.innerHTML)
-    const newTimerDiv = document.createElement("div");
-    newTimerDiv.setAttribute("id", `timer${numOfTimers}`);
-    timers.appendChild(newTimerDiv);
-
-    // // Create a new timer display element  
-    // const newTimerPara = document.createElement("p");
-    // newTimerPara.setAttribute("id", `timer${numOfTimers}`);
-    // newTimerPara.textContent = "0";
-
-
-    // curTimerHeader = document.getElementById("timer"); 
-    // parentTimerNameDiv.insertBefore(newTimerPara, timerNameDiv);
+    // Create a new timer element
+    const timersDiv = document.getElementById("timers");
+    const timerNameDiv = document.createElement("div");
+    timerNameDiv.setAttribute("id", `timerName${numOfTimers}`);
+    timerNameDiv.textContent = `Timer ${numOfTimers + 1}`;
+    timersDiv.appendChild(timerNameDiv);
+    
+    // Create a new timer display paragraph
+    const timerDisplayPara = document.createElement("p"); 
+    timerNameDiv.appendChild(timerDisplayPara);
+    timerDisplayPara.setAttribute("id", `timer${numOfTimers}`);
+    timerDisplayPara.textContent = "0";
 
     curTime = 0;
 
