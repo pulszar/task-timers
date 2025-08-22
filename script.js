@@ -6,8 +6,14 @@ function newTimer() {
     const timersDiv = document.getElementById("timers");
     const timerNameDiv = document.createElement("div");
     timerNameDiv.setAttribute("id", `timerName${numOfTimers}`);
-    timerNameDiv.textContent = `Timer ${numOfTimers + 1}`;
     timersDiv.appendChild(timerNameDiv);
+
+    // // Create a new input field for the timer name
+    const timerNameInput = document.createElement("input");
+    timerNameInput.setAttribute("type", "text");
+    timerNameInput.setAttribute("id", `timerNameInput${numOfTimers}`);
+    timerNameInput.setAttribute("value", `Timer ${numOfTimers}`);
+    timerNameDiv.appendChild(timerNameInput);
     
     // Create a new timer display paragraph
     const timerDisplayPara = document.createElement("p"); 
@@ -26,12 +32,14 @@ function newTimer() {
 }
 
 function startTimer(timerIndex) {
+    // Set initial conditions
     clearInterval(intervalID);
-    curTime = 0;
+    let curTime = 0;
     // Call once immeditely to prevent delay
     curTime = timer(curTime)
     intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
 
+    // Helper function to update the timer
     function timer(curTime) {
         console.log("current timer is" + `timer${numOfTimers}`)
         console.log(curTime);
