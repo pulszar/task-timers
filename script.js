@@ -1,5 +1,4 @@
 var numOfTimers = 1;
-// const map = new Map();
 intervalID = null;
 
 function newTimer() {
@@ -29,6 +28,7 @@ function newTimer() {
 function startTimer(timerIndex) {
     clearInterval(intervalID);
     curTime = 0;
+    // Call once immeditely to prevent delay
     curTime = timer(curTime)
     intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
 
