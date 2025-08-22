@@ -1,32 +1,26 @@
-var numOfTimers = 0;
+var numOfTimers = 1;
 // const map = new Map();
 intervalID = null;
 
 function newTimer() {
     clearInterval(intervalID);
 
-    // Create a new timer and append it to the timers section
-    const newTimerNameDiv = document.createElement("div");
-    const newTimerName = document.createTextNode("New Timer Name")
-    newTimerNameDiv.appendChild(newTimerName);
-    newTimerNameDiv.setAttribute("id", `timerName${numOfTimers}`);
-    // console.log("Creating new timer with ID: " + `timerName${numOfTimers}`);
+    const timers = document.getElementById("timers");
 
-    // Insert the new timer name before the current timer name
-    const parentTimerNameDiv = document.getElementById("timer").parentNode;
-    const timerNameDiv = document.getElementById("timer")
-    parentTimerNameDiv.insertBefore(newTimerNameDiv, timerNameDiv);
-    console.log("New timer created");
+    let element = document.getElementById("timer");
+    console.log(element.innerHTML)
+    const newTimerDiv = document.createElement("div");
+    newTimerDiv.setAttribute("id", `timer${numOfTimers}`);
+    timers.appendChild(newTimerDiv);
 
-    // Create a new timer display element  
-    const newTimerPara = document.createElement("p");
-    newTimerPara.setAttribute("id", `timer${numOfTimers}`);
-    const newTime = document.createTextNode("0");
-    newTimerPara.appendChild(newTime);
+    // // Create a new timer display element  
+    // const newTimerPara = document.createElement("p");
+    // newTimerPara.setAttribute("id", `timer${numOfTimers}`);
+    // newTimerPara.textContent = "0";
 
-    // Insert the new timer display before the current timer display
-    curTimerHeader = document.getElementById("timer"); 
-    parentTimerNameDiv.insertBefore(newTimerPara, timerNameDiv);
+
+    // curTimerHeader = document.getElementById("timer"); 
+    // parentTimerNameDiv.insertBefore(newTimerPara, timerNameDiv);
 
     curTime = 0;
 
