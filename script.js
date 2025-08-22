@@ -3,8 +3,6 @@ var numOfTimers = 1;
 intervalID = null;
 
 function newTimer() {
-    clearInterval(intervalID);
-
     // Create a new timer element
     const timersDiv = document.getElementById("timers");
     const timerNameDiv = document.createElement("div");
@@ -21,23 +19,26 @@ function newTimer() {
     // Create a new start button
     const startButton = document.createElement("button");
     startButton.setAttribute("id", `startTimer${numOfTimers}`);
+    startButton.setAttribute("onclick", `startTimer(${numOfTimers})`);
     startButton.textContent = "Start";
     timerNameDiv.appendChild(startButton);
 
+    numOfTimers++;
+}
 
+function startTimer(timerIndex) {
+    clearInterval(intervalID);
     curTime = 0;
-
-    // Anonymous function so function return isn't used, the function with the call is used instead
+    curTime = timer(curTime)
     intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
 
     function timer(curTime) {
         console.log("current timer is" + `timer${numOfTimers}`)
         console.log(curTime);
         // Update the timer display
-        const curTimerHeader = document.getElementById(`timer${numOfTimers - 1}`);
+        const curTimerHeader = document.getElementById(`timer${timerIndex}`);
         curTimerHeader.textContent = curTime;
         return curTime += 1;
     }
     console.log("Number of timers: " + (numOfTimers + 1));
-    numOfTimers++;
 }
