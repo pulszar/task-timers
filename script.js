@@ -76,6 +76,7 @@ function newTimer() {
 }
 
 function startTimer(timerIndex) {
+    document.getElementById(`startTimer${timerIndex}`).remove();
     // Set initial conditions
     clearInterval(intervalID);
     let curTime = 0;
