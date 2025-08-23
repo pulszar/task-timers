@@ -13,6 +13,7 @@ function newTimer() {
     const timerNameInput = document.createElement("input");
     timerNameInput.setAttribute("type", "text");
     timerNameInput.setAttribute("id", `timerNameInput${numOfTimers}`);
+    timerNameInput.setAttribute("class", "timerFieldName");
     timerNameInput.setAttribute("value", `Timer ${numOfTimers + 1}`);
     timerNameDiv.appendChild(timerNameInput);
     
@@ -22,26 +23,38 @@ function newTimer() {
     timerDisplayPara.textContent = "0";
     timerNameDiv.appendChild(timerDisplayPara);
     
+    // Buttons for timer control
+
+    // Div for buttons
+    const timerButtons = document.createElement("div");
+    timerButtons.setAttribute("class", "timerButtons");
+    timerNameDiv.appendChild(timerButtons);
+
+
     // Create a new start button
     const startButton = document.createElement("button");
     startButton.setAttribute("id", `startTimer${numOfTimers}`);
     startButton.setAttribute("onclick", `startTimer(${numOfTimers})`);
+    startButton.setAttribute("class", "timerButton");
     startButton.textContent = "Start";
-    timerNameDiv.appendChild(startButton);
+    timerButtons.appendChild(startButton);
 
     // Create a new stop button
     const stopButton = document.createElement("button");
     stopButton.setAttribute("id", `stopTimer${numOfTimers}`);
     stopButton.setAttribute("onclick", `stopTimer(${numOfTimers})`);
+    stopButton.setAttribute("class", "timerButton");
     stopButton.textContent = "Stop";
-    timerNameDiv.appendChild(stopButton);
+    timerButtons.appendChild(stopButton);
 
     // Create a new reset button
     const resetButton = document.createElement("button");
     resetButton.setAttribute("id", `resetTimer${numOfTimers}`);
     resetButton.setAttribute("onclick", `resetTimer(${numOfTimers})`);
+    resetButton.setAttribute("class", "timerButton");
     resetButton.textContent = "Reset";
-    timerNameDiv.appendChild(resetButton);
+    timerButtons.appendChild(resetButton);
+
 
 
     numOfTimers++;

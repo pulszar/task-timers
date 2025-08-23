@@ -11,15 +11,18 @@
 
     <h1 id= "title">Task Timers</h1>
     <div id = newTimerDiv>
-        <button id="newTimer" onclick="newTimer()">Add new timer</button>
+        <button onclick="newTimer()">Add new timer</button>
     </div>
     <div id="timers">
-        <div id="timerDisplay0" class = "timerDisplay">
-            <input type="text" id="fname" name="fname" value="Timer 1"><br>
+        <div id="timerName0" class = "timerDisplay">
+            <input id = "timeNameInput0" class = "timerFieldName" type="text" value="Timer 1"><br>
             <p id="timer0">0</p>
-            <button id = startTimer1 onclick = startTimer(0)>Start</button>
-            <button id = stopTimer1 onclick = stopTimer(0)>Stop</button>
-            <button id = resetTimer1 onclick = resetTimer(0)>Reset</button>
+            <div class = "timerButtons">
+                <button id = startTimer1 onclick = startTimer(0)>Start</button>
+                <button id = stopTimer1 onclick = stopTimer(0)>Stop</button>
+                <button id = resetTimer1 onclick = resetTimer(0)>Reset</button>
+            </div>
+
         </div>
     </div>
 </body>
