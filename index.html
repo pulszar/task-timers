@@ -9,9 +9,11 @@
 <body>
     <script src="script.js"></script>
 
-    <h1>Task Timers</h1>
-    <button onclick="newTimer()">Add new timer</button>
-    <div id="timers" class = "timers">
+    <h1 id= "title">Task Timers</h1>
+    <div id = newTimerDiv>
+        <button id="newTimer" onclick="newTimer()">Add new timer</button>
+    </div>
+    <div id="timers">
         <div id="timerDisplay0" class = "timerDisplay">
             <input type="text" id="fname" name="fname" value="Timer 1"><br>
             <p id="timer0">0</p>
