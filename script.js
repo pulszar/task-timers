@@ -108,6 +108,5 @@ function resetTimer(timerIndex) {
 }
 
 function deleteTimer(timerIndex) {
-    timerToDelete = document.getElementById(`timerName${timerIndex}`);
-    timerToDelete.remove();
+    document.getElementById(`timerName${timerIndex}`).remove();
 }
