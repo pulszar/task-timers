@@ -55,6 +55,14 @@ function newTimer() {
     resetButton.textContent = "Reset";
     timerButtons.appendChild(resetButton);
 
+    // Create a new delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("id", `deleteTimer${numOfTimers}`);
+    deleteButton.setAttribute("onclick", `deleteTimer(${numOfTimers})`);
+    deleteButton.setAttribute("class", "timerButton");
+    deleteButton.textContent = "Delete";
+    timerButtons.appendChild(deleteButton);
+
 
 
     numOfTimers++;
@@ -90,4 +98,9 @@ function resetTimer(timerIndex) {
     const curTimerHeader = document.getElementById(`timer${timerIndex}`);
     curTimerHeader.textContent = "0";
     console.log("Reset timer " + timerIndex);
+}
+
+function deleteTimer(timerIndex) {
+    timerToDelete = document.getElementById(`timerName${timerIndex}`);
+    timerToDelete.remove();
 }
