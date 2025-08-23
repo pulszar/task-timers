@@ -9,7 +9,7 @@ body{
 .timerDisplay {
     border: 2px solid black;
     padding: 10px;
-    width: 270px;
+    width: 370px;
     margin: 10px;
     background-color: #f0f0f0;
     border-radius: 5px;
@@ -64,11 +64,20 @@ button:hover {
 
 .timerButtons {
     display: flex;
+    flex-wrap: wrap;
+    align-content: center;
 }
 
 .timerFieldName {
+    display: flex;
     font-size: 20px;
     margin-bottom: 10px;
     padding: 5px;
     width: 80%;
+    align-content: center;
+}
+
+.timerInputBox {
+    display: flex;
+    justify-content: center;
 }
