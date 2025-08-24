@@ -53,7 +53,7 @@ function newTimer() {
     deleteButton.setAttribute("class", "timerButton");
     deleteButton.textContent = "Delete";
     timerButtons.appendChild(deleteButton);
-    
+
     numOfTimers++;
 }
 
@@ -113,6 +113,21 @@ function resetTimer(timerIndex) {
     clearInterval(intervalID);
     const curTimerHeader = document.getElementById(`timer${timerIndex}`);
     curTimerHeader.textContent = "0";
+
+    // Remove stop and reset buttons
+    document.getElementById(`stopTimer${timerIndex}`).remove();
+    document.getElementById(`resetTimer${timerIndex}`).remove();
+
+    // Restore start button
+    timerButtons = document.getElementById(`timerButton${timerIndex}`); // Works without this line?
+    const startButton = document.createElement("button");
+    startButton.setAttribute("id", `startTimer${timerIndex}`);
+    startButton.setAttribute("onclick", `startTimer(${timerIndex})`);
+    startButton.setAttribute("class", "timerButton");
+    startButton.textContent = "Start";
+    console.log(timerButtons);
+    timerButtons.appendChild(startButton);
+
     console.log("Reset timer " + timerIndex);
 }
 
