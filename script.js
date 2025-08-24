@@ -60,6 +60,8 @@ function newTimer() {
 function startTimer(timerIndex) {
     // Kill start button after starting timer
     document.getElementById(`startTimer${timerIndex}`).remove();
+    // Kill delete button after starting timer, restore it later to maintain order
+    document.getElementById(`deleteTimer${timerIndex}`).remove();
 
     // Set initial conditions
 
@@ -70,7 +72,7 @@ function startTimer(timerIndex) {
     // Render in pause and reset buttons
     
     // Create a new stop button
-    timerButtons = document.getElementById(`timerButton${timerIndex}`);
+    const timerButtons = document.getElementById(`timerButton${timerIndex}`);
     console.log(timerButtons)
 
     const stopButton = document.createElement("button");
@@ -87,6 +89,15 @@ function startTimer(timerIndex) {
     resetButton.setAttribute("class", "timerButton");
     resetButton.textContent = "Reset";
     timerButtons.appendChild(resetButton);
+
+    // Restore delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("id", `deleteTimer${timerIndex}`);
+    deleteButton.setAttribute("onclick", `deleteTimer(${timerIndex})`);
+    deleteButton.setAttribute("class", "timerButton");
+    deleteButton.textContent = "Delete";
+    timerButtons.appendChild(deleteButton);
+
 
     // Call once immeditely to prevent delay
     curTime = timer(curTime)
@@ -113,22 +124,31 @@ function resetTimer(timerIndex) {
     clearInterval(intervalID);
     const curTimerHeader = document.getElementById(`timer${timerIndex}`);
     curTimerHeader.textContent = "0";
-
-    // Remove stop and reset buttons
+    
+    // Remove stop, reset, and delete buttons
     document.getElementById(`stopTimer${timerIndex}`).remove();
     document.getElementById(`resetTimer${timerIndex}`).remove();
-
+    document.getElementById(`deleteTimer${timerIndex}`).remove();
+    
     // Restore start button
-    timerButtons = document.getElementById(`timerButton${timerIndex}`); // Works without this line?
+    const timerButtons = document.getElementById(`timerButton${timerIndex}`); 
+    console.log(timerButtons);
     const startButton = document.createElement("button");
     startButton.setAttribute("id", `startTimer${timerIndex}`);
     startButton.setAttribute("onclick", `startTimer(${timerIndex})`);
     startButton.setAttribute("class", "timerButton");
     startButton.textContent = "Start";
-    console.log(timerButtons);
     timerButtons.appendChild(startButton);
 
-    console.log("Reset timer " + timerIndex);
+    // Restore delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("id", `deleteTimer${timerIndex}`);
+    deleteButton.setAttribute("onclick", `deleteTimer(${timerIndex})`);
+    deleteButton.setAttribute("class", "timerButton");
+    deleteButton.textContent = "Delete";
+    timerButtons.appendChild(deleteButton);
+
+    // console.log("Reset timer " + timerIndex);
 }
 
 function deleteTimer(timerIndex) {
