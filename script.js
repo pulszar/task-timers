@@ -71,16 +71,16 @@ function startTimer(timerIndex) {
     
     // Render in pause and reset buttons
     
-    // Create a new stop button
+    // Create a new pause button
     const timerButtons = document.getElementById(`timerButton${timerIndex}`);
     console.log(timerButtons)
 
-    const stopButton = document.createElement("button");
-    stopButton.setAttribute("id", `stopTimer${timerIndex}`);
-    stopButton.setAttribute("onclick", `stopTimer(${timerIndex})`);
-    stopButton.setAttribute("class", "timerButton");
-    stopButton.textContent = "Stop";
-    timerButtons.appendChild(stopButton);
+    const pauseButton = document.createElement("button");
+    pauseButton.setAttribute("id", `pauseTimer${timerIndex}`);
+    pauseButton.setAttribute("onclick", `pauseTimer(${timerIndex})`);
+    pauseButton.setAttribute("class", "timerButton");
+    pauseButton.textContent = "Pause";
+    timerButtons.appendChild(pauseButton);
 
     // Create a new reset button
     const resetButton = document.createElement("button");
@@ -114,9 +114,46 @@ function startTimer(timerIndex) {
     console.log("Number of timers: " + (numOfTimers + 1));
 }
 
-function stopTimer(timerIndex) {
+function pauseTimer(timerIndex) {
     clearInterval(intervalID);
-    console.log("Stopped timer " + timerIndex);
+    console.log("Paused timer " + timerIndex);
+
+    // Change pause button to resume button
+    const resumeButton = document.getElementById(`pauseTimer${timerIndex}`);
+    resumeButton.setAttribute("id", `resumeTimer${timerIndex}`);
+    resumeButton.setAttribute("onclick", `resumeTimer(${timerIndex})`);
+    resumeButton.setAttribute("class", "timerButton");
+    resumeButton.textContent = "Resume";
+}
+
+function resumeTimer(timerIndex) {
+    // Change resume button to pause button
+    const pauseButton = document.getElementById(`resumeTimer${timerIndex}`);
+    pauseButton.setAttribute("id", `pauseTimer${timerIndex}`);
+    pauseButton.setAttribute("onclick", `pauseTimer(${timerIndex})`);
+    pauseButton.setAttribute("class", "timerButton");
+    pauseButton.textContent = "Pause";
+
+    // Get current time from timer display
+    const curTimerHeader = document.getElementById(`timer${timerIndex}`);
+    let curTime = parseInt(curTimerHeader.textContent);
+
+    // Restart interval
+    intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
+    
+    // Call once immeditely to prevent delay
+    curTime = timer(curTime)
+    // Helper function to update the timer
+    function timer(curTime) {
+        console.log("current timer is" + `timer${numOfTimers}`)
+        console.log(curTime);
+        // Update the timer display
+        const curTimerHeader = document.getElementById(`timer${timerIndex}`);
+        curTimerHeader.textContent = curTime;
+        return curTime += 1;
+    }
+
+
 }
 
 function resetTimer(timerIndex) {
@@ -125,8 +162,14 @@ function resetTimer(timerIndex) {
     const curTimerHeader = document.getElementById(`timer${timerIndex}`);
     curTimerHeader.textContent = "0";
     
-    // Remove stop, reset, and delete buttons
-    document.getElementById(`stopTimer${timerIndex}`).remove();
+    // Remove pause/resume, reset, and delete buttons
+
+    // If pause is active, remove it, otherwise resume is active, so remove that instead
+    if (document.getElementById(`pauseTimer${timerIndex}`)) {
+        document.getElementById(`pauseTimer${timerIndex}`).remove();
+    } else {
+        document.getElementById(`resumeTimer${timerIndex}`).remove();
+    }
     document.getElementById(`resetTimer${timerIndex}`).remove();
     document.getElementById(`deleteTimer${timerIndex}`).remove();
     
