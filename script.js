@@ -100,21 +100,23 @@ function startTimer(timerIndex) {
 
 
     // Call once immeditely to prevent delay
-    curTime = timer(curTime)
-    intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
+    curTime = timer(curTime, timerIndex)
+    intervalID = setInterval(function() {curTime = timer(curTime, timerIndex);}, 1000);
     // Helper function to update the timer
-    function timer(curTime) {
-        console.log("current timer is" + `timer${numOfTimers}`)
-        console.log(curTime);
-        // Update the timer display
-        const curTimerHeader = document.getElementById(`timer${timerIndex}`);
-        curTimerHeader.textContent = curTime;
-        return curTime += 1;
-    }
     console.log("Number of timers: " + (numOfTimers + 1));
 }
 
+function timer(curTime, timerIndex) {
+    console.log("current timer is" + `timer${numOfTimers}`)
+    console.log(curTime);
+    // Update the timer display
+    const curTimerHeader = document.getElementById(`timer${timerIndex}`);
+    curTimerHeader.textContent = curTime;
+    return curTime += 1;
+}
+
 function pauseTimer(timerIndex) {
+    console.log(clearInterval(intervalID));
     clearInterval(intervalID);
     console.log("Paused timer " + timerIndex);
 
@@ -138,21 +140,10 @@ function resumeTimer(timerIndex) {
     const curTimerHeader = document.getElementById(`timer${timerIndex}`);
     let curTime = parseInt(curTimerHeader.textContent);
 
-    // Restart interval
-    intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
-    
+    // Resume interval
     // Call once immeditely to prevent delay
-    curTime = timer(curTime)
-    // Helper function to update the timer
-    function timer(curTime) {
-        console.log("current timer is" + `timer${numOfTimers}`)
-        console.log(curTime);
-        // Update the timer display
-        const curTimerHeader = document.getElementById(`timer${timerIndex}`);
-        curTimerHeader.textContent = curTime;
-        return curTime += 1;
-    }
-
+    curTime = timer(curTime, timerIndex);
+    intervalID = setInterval(function() {curTime = timer(curTime, timerIndex);}, 1000);
 
 }
 
