@@ -34,7 +34,7 @@ function newTimer() {
 
     // Div for buttons
     const timerButtons = document.createElement("div");
-    timerButtons.setAttribute("class", "timerButtons");
+    timerButtons.setAttribute("id", `timerButton${numOfTimers}`);
     timerNameDiv.appendChild(timerButtons);
 
 
@@ -46,22 +46,6 @@ function newTimer() {
     startButton.textContent = "Start";
     timerButtons.appendChild(startButton);
 
-    // Create a new stop button
-    const stopButton = document.createElement("button");
-    stopButton.setAttribute("id", `stopTimer${numOfTimers}`);
-    stopButton.setAttribute("onclick", `stopTimer(${numOfTimers})`);
-    stopButton.setAttribute("class", "timerButton");
-    stopButton.textContent = "Stop";
-    timerButtons.appendChild(stopButton);
-
-    // Create a new reset button
-    const resetButton = document.createElement("button");
-    resetButton.setAttribute("id", `resetTimer${numOfTimers}`);
-    resetButton.setAttribute("onclick", `resetTimer(${numOfTimers})`);
-    resetButton.setAttribute("class", "timerButton");
-    resetButton.textContent = "Reset";
-    timerButtons.appendChild(resetButton);
-
     // Create a new delete button
     const deleteButton = document.createElement("button");
     deleteButton.setAttribute("id", `deleteTimer${numOfTimers}`);
@@ -69,21 +53,44 @@ function newTimer() {
     deleteButton.setAttribute("class", "timerButton");
     deleteButton.textContent = "Delete";
     timerButtons.appendChild(deleteButton);
-
-
-
+    
     numOfTimers++;
 }
 
 function startTimer(timerIndex) {
+    // Kill start button after starting timer
     document.getElementById(`startTimer${timerIndex}`).remove();
+
     // Set initial conditions
+
+    // Prevent previous internval from affecting new timer
     clearInterval(intervalID);
     let curTime = 0;
+    
+    // Render in pause and reset buttons
+    
+    // Create a new stop button
+    timerButtons = document.getElementById(`timerButton${timerIndex}`);
+    console.log(timerButtons)
+
+    const stopButton = document.createElement("button");
+    stopButton.setAttribute("id", `stopTimer${timerIndex}`);
+    stopButton.setAttribute("onclick", `stopTimer(${timerIndex})`);
+    stopButton.setAttribute("class", "timerButton");
+    stopButton.textContent = "Stop";
+    timerButtons.appendChild(stopButton);
+
+    // Create a new reset button
+    const resetButton = document.createElement("button");
+    resetButton.setAttribute("id", `resetTimer${timerIndex}`);
+    resetButton.setAttribute("onclick", `resetTimer(${timerIndex})`);
+    resetButton.setAttribute("class", "timerButton");
+    resetButton.textContent = "Reset";
+    timerButtons.appendChild(resetButton);
+
     // Call once immeditely to prevent delay
     curTime = timer(curTime)
     intervalID = setInterval(function() {curTime = timer(curTime);}, 1000);
-
     // Helper function to update the timer
     function timer(curTime) {
         console.log("current timer is" + `timer${numOfTimers}`)
@@ -102,6 +109,7 @@ function stopTimer(timerIndex) {
 }
 
 function resetTimer(timerIndex) {
+    console.log("Resetting timer... timer"+timerIndex);
     clearInterval(intervalID);
     const curTimerHeader = document.getElementById(`timer${timerIndex}`);
     curTimerHeader.textContent = "0";
