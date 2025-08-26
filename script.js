@@ -24,11 +24,31 @@ function newTimer() {
     timerInputBoxDiv.appendChild(timerNameInput);
 
     
-    // Create a new timer display paragraph
-    const timerDisplayPara = document.createElement("p"); 
-    timerDisplayPara.setAttribute("id", `timer${numOfTimers}`);
-    timerDisplayPara.textContent = "0";
-    timerNameDiv.appendChild(timerDisplayPara);
+    // // Create a new timer display paragraph
+    // const timerDisplayPara = document.createElement("p"); 
+    // timerDisplayPara.setAttribute("id", `timer${numOfTimers}`);
+    // timerDisplayPara.textContent = "0";
+    // timerNameDiv.appendChild(timerDisplayPara);
+
+    // Create timer parts div
+    const timerPartsDiv = document.createElement("div");
+    timerPartsDiv.setAttribute("class", "timerParts");
+    timerNameDiv.appendChild(timerPartsDiv);
+
+    // Create hours part
+    const hoursPara = document.createElement("p");
+    hoursPara.setAttribute("id", `hours${numOfTimers}`);
+    timerPartsDiv.appendChild(hoursPara);
+    // Create minutes part
+    const minutesPara = document.createElement("p");
+    minutesPara.setAttribute("id", `minutes${numOfTimers}`);
+    timerPartsDiv.appendChild(minutesPara);
+    // Create seconds part
+    const secondsPara = document.createElement("p");
+    secondsPara.setAttribute("id", `seconds${numOfTimers}`);
+    timerPartsDiv.appendChild(secondsPara);
+    hoursPara.textContent = "0";
+
     
     // Buttons for timer control
 
@@ -67,7 +87,7 @@ function startTimer(timerIndex) {
 
     // Prevent previous internval from affecting new timer
     clearInterval(intervalID);
-    let curTime = 0;
+    let seconds = 0;
     
     // Render in pause and reset buttons
     
@@ -100,19 +120,40 @@ function startTimer(timerIndex) {
 
 
     // Call once immeditely to prevent delay
-    curTime = timer(curTime, timerIndex)
-    intervalID = setInterval(function() {curTime = timer(curTime, timerIndex);}, 1000);
+    seconds = timer(seconds, timerIndex)
+    intervalID = setInterval(function() {seconds = timer(seconds, timerIndex);}, 1000);
     // Helper function to update the timer
     console.log("Number of timers: " + (numOfTimers + 1));
 }
 
-function timer(curTime, timerIndex) {
-    console.log("current timer is" + `timer${numOfTimers}`)
-    console.log(curTime);
-    // Update the timer display
-    const curTimerHeader = document.getElementById(`timer${timerIndex}`);
-    curTimerHeader.textContent = curTime;
-    return curTime += 1;
+function timer(seconds, timerIndex) {
+    
+    const hoursPara = document.getElementById(`hours${timerIndex}`);
+    var hours = hoursPara.textContent;
+    const minutesPara = document.getElementById(`minutes${timerIndex}`);
+    var minutes = minutesPara.textContent;
+    const secondsPara = document.getElementById(`seconds${timerIndex}`);
+    var seconds = secondsPara.textContent;
+
+    if (seconds % 60 == 0 && seconds != 0) {
+        minutes++;
+        minutesPara.textContent = minutes;
+        seconds = 0;
+        secondsPara.textContent = seconds;
+    }
+    if (minutes % 60 == 0 && minutes != 0) {
+        hours++;
+        hoursPara.textContent = hours;
+        minutes = 0;
+        minutesPara.textContent = minutes;
+    }
+    secondsPara.textContent = seconds;
+    console.log("hours: " + hours + " minutes: " + minutes + " seconds: " + seconds);
+
+
+    console.log("current timer is" + `timer${timerIndex}`)
+    console.log(seconds);
+    return seconds += 1;
 }
 
 function pauseTimer(timerIndex) {
@@ -137,21 +178,21 @@ function resumeTimer(timerIndex) {
     pauseButton.textContent = "Pause";
 
     // Get current time from timer display
-    const curTimerHeader = document.getElementById(`timer${timerIndex}`);
-    let curTime = parseInt(curTimerHeader.textContent);
+    const secondsrHeader = document.getElementById(`timer${timerIndex}`);
+    let seconds = parseInt(secondsrHeader.textContent);
 
     // Resume interval
     // Call once immeditely to prevent delay
-    curTime = timer(curTime, timerIndex);
-    intervalID = setInterval(function() {curTime = timer(curTime, timerIndex);}, 1000);
+    seconds = timer(seconds, timerIndex);
+    intervalID = setInterval(function() {seconds = timer(seconds, timerIndex);}, 1000);
 
 }
 
 function resetTimer(timerIndex) {
     console.log("Resetting timer... timer"+timerIndex);
     clearInterval(intervalID);
-    const curTimerHeader = document.getElementById(`timer${timerIndex}`);
-    curTimerHeader.textContent = "0";
+    const secondsrHeader = document.getElementById(`timer${timerIndex}`);
+    secondsrHeader.textContent = "0";
     
     // Remove pause/resume, reset, and delete buttons
 
