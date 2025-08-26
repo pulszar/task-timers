@@ -39,10 +39,20 @@ function newTimer() {
     const hoursPara = document.createElement("p");
     hoursPara.setAttribute("id", `hours${numOfTimers}`);
     timerPartsDiv.appendChild(hoursPara);
+    // Create colon placeholder for hours
+    const hoursColon = document.createElement("p");
+    hoursColon.setAttribute("id", `hoursColon${numOfTimers}`);
+    hoursColon.textContent = "";
+    hoursPara.insertAdjacentElement("afterend", hoursColon);
     // Create minutes part
     const minutesPara = document.createElement("p");
     minutesPara.setAttribute("id", `minutes${numOfTimers}`);
     timerPartsDiv.appendChild(minutesPara);
+    // Create colon placeholder for minutes
+    const minutesColon = document.createElement("p");
+    minutesColon.setAttribute("id", `minutesColon${numOfTimers}`);
+    minutesColon.textContent = "";
+    minutesPara.insertAdjacentElement("afterend", minutesColon);
     // Create seconds part
     const secondsPara = document.createElement("p");
     secondsPara.setAttribute("id", `seconds${numOfTimers}`);
@@ -87,7 +97,7 @@ function startTimer(timerIndex) {
 
     // Prevent previous internval from affecting new timer
     clearInterval(intervalID);
-    let seconds = 0;
+    let seconds = 58;
     
     // Render in pause and reset buttons
     
@@ -136,6 +146,13 @@ function timer(seconds, timerIndex) {
     // var seconds = secondsPara.textContent;
 
     if (seconds % 60 == 0 && seconds != 0) {
+        // Create colon if it doesn't exist
+        if (document.getElementById(`minutesColon${timerIndex}`).textContent != ":") {
+            newColon = document.createElement("p");
+            newColon.setAttribute("id", `minutesColon${timerIndex}`);
+            newColon.textContent = ":";
+            minutesPara.insertAdjacentElement("afterend", newColon);
+        }
         console.log("incrementing minutes");
         minutes++;
         minutesPara.textContent = minutes;
@@ -143,6 +160,13 @@ function timer(seconds, timerIndex) {
         secondsPara.textContent = seconds;
     }
     if (minutes % 60 == 0 && minutes != 0) {
+        // Create colon if it doesn't exist
+        if (document.getElementById(`hoursColon${timerIndex}`).textContent != ":") {
+            newColon = document.createElement("p");
+            newColon.setAttribute("id", `hoursColon${timerIndex}`);
+            newColon.textContent = ":";
+            hoursPara.insertAdjacentElement("afterend", newColon);
+        }
         console.log("incrementing hours");
         hours++;
         hoursPara.textContent = hours;
