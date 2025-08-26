@@ -44,6 +44,7 @@ function newTimer() {
     hoursColon.setAttribute("id", `hoursColon${numOfTimers}`);
     hoursColon.textContent = "";
     hoursPara.insertAdjacentElement("afterend", hoursColon);
+    
     // Create minutes part
     const minutesPara = document.createElement("p");
     minutesPara.setAttribute("id", `minutes${numOfTimers}`);
@@ -53,6 +54,7 @@ function newTimer() {
     minutesColon.setAttribute("id", `minutesColon${numOfTimers}`);
     minutesColon.textContent = "";
     minutesPara.insertAdjacentElement("afterend", minutesColon);
+    
     // Create seconds part
     const secondsPara = document.createElement("p");
     secondsPara.setAttribute("id", `seconds${numOfTimers}`);
@@ -97,7 +99,7 @@ function startTimer(timerIndex) {
 
     // Prevent previous internval from affecting new timer
     clearInterval(intervalID);
-    let seconds = 58;
+    let seconds = 0;
     
     // Render in pause and reset buttons
     
@@ -204,8 +206,8 @@ function resumeTimer(timerIndex) {
     pauseButton.textContent = "Pause";
 
     // Get current time from timer display
-    const secondsrHeader = document.getElementById(`timer${timerIndex}`);
-    let seconds = parseInt(secondsrHeader.textContent);
+    const secondsPara = document.getElementById(`seconds${timerIndex}`);
+    let seconds = parseInt(secondsPara.textContent);
 
     // Resume interval
     // Call once immeditely to prevent delay
