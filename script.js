@@ -59,7 +59,7 @@ function newTimer() {
     const secondsPara = document.createElement("p");
     secondsPara.setAttribute("id", `seconds${numOfTimers}`);
     timerPartsDiv.appendChild(secondsPara);
-    hoursPara.textContent = "0";
+    secondsPara.textContent = "0";
 
     
     // Buttons for timer control
