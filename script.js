@@ -127,21 +127,23 @@ function startTimer(timerIndex) {
 }
 
 function timer(seconds, timerIndex) {
-    
+    console.log("current second is" +seconds)
     const hoursPara = document.getElementById(`hours${timerIndex}`);
-    var hours = hoursPara.textContent;
     const minutesPara = document.getElementById(`minutes${timerIndex}`);
-    var minutes = minutesPara.textContent;
     const secondsPara = document.getElementById(`seconds${timerIndex}`);
-    var seconds = secondsPara.textContent;
+    var hours = hoursPara.textContent;
+    var minutes = minutesPara.textContent;
+    // var seconds = secondsPara.textContent;
 
     if (seconds % 60 == 0 && seconds != 0) {
+        console.log("incrementing minutes");
         minutes++;
         minutesPara.textContent = minutes;
         seconds = 0;
         secondsPara.textContent = seconds;
     }
     if (minutes % 60 == 0 && minutes != 0) {
+        console.log("incrementing hours");
         hours++;
         hoursPara.textContent = hours;
         minutes = 0;
