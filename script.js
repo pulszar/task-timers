@@ -150,10 +150,7 @@ function timer(seconds, timerIndex) {
     if (seconds % 60 == 0 && seconds != 0) {
         // Create colon if it doesn't exist
         if (document.getElementById(`minutesColon${timerIndex}`).textContent != ":") {
-            newColon = document.createElement("p");
-            newColon.setAttribute("id", `minutesColon${timerIndex}`);
-            newColon.textContent = ":";
-            minutesPara.insertAdjacentElement("afterend", newColon);
+            document.getElementById(`minutesColon${timerIndex}`).textContent = ":"
         }
         console.log("incrementing minutes");
         minutes++;
@@ -164,10 +161,7 @@ function timer(seconds, timerIndex) {
     if (minutes % 60 == 0 && minutes != 0) {
         // Create colon if it doesn't exist
         if (document.getElementById(`hoursColon${timerIndex}`).textContent != ":") {
-            newColon = document.createElement("p");
-            newColon.setAttribute("id", `hoursColon${timerIndex}`);
-            newColon.textContent = ":";
-            hoursPara.insertAdjacentElement("afterend", newColon);
+            document.getElementById(`hoursColon${timerIndex}`).textContent = ":"
         }
         console.log("incrementing hours");
         hours++;
