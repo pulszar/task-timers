@@ -31,47 +31,11 @@ function newTimer() {
     // timerNameDiv.appendChild(timerDisplayPara);
 
     
-    
-    // Buttons for timer control
-    
-    // Div for buttons
-    const timerButtons = document.createElement("div");
-    timerButtons.setAttribute("id", `timerButton${numOfTimers}`);
-    timerNameDiv.appendChild(timerButtons);
-    
-    
-    // Create a new start button
-    const startButton = document.createElement("button");
-    startButton.setAttribute("id", `startTimer${numOfTimers}`);
-    startButton.setAttribute("onclick", `startTimer(${numOfTimers})`);
-    startButton.setAttribute("class", "timerButton");
-    startButton.textContent = "Start";
-    timerButtons.appendChild(startButton);
-    
-    // Create a new delete button
-    const deleteButton = document.createElement("button");
-    deleteButton.setAttribute("id", `deleteTimer${numOfTimers}`);
-    deleteButton.setAttribute("onclick", `deleteTimer(${numOfTimers})`);
-    deleteButton.setAttribute("class", "timerButton");
-    deleteButton.textContent = "Delete";
-    timerButtons.appendChild(deleteButton);
-    
-    numOfTimers++;
-}
-
-function startTimer(timerIndex) {
-    // Kill start button after starting timer
-    document.getElementById(`startTimer${timerIndex}`).remove();
-    // Kill delete button after starting timer, restore it later to maintain order
-    document.getElementById(`deleteTimer${timerIndex}`).remove();
-    
-    const timerNameDiv = document.getElementById(`timerName${timerIndex}`);
-
     // Create timer parts div
     const timerPartsDiv = document.createElement("div");
     timerPartsDiv.setAttribute("class", "timerParts");
     timerNameDiv.appendChild(timerPartsDiv);
-    
+
     // Create hours part
     const hoursPara = document.createElement("p");
     hoursPara.setAttribute("id", `hours${numOfTimers}`);
@@ -97,8 +61,42 @@ function startTimer(timerIndex) {
     secondsPara.setAttribute("id", `seconds${numOfTimers}`);
     timerPartsDiv.appendChild(secondsPara);
     secondsPara.textContent = "0";
-    // Set initial conditions
     
+    // Buttons for timer control
+
+    // Div for buttons
+    const timerButtons = document.createElement("div");
+    timerButtons.setAttribute("id", `timerButton${numOfTimers}`);
+    timerNameDiv.appendChild(timerButtons);
+
+
+    // Create a new start button
+    const startButton = document.createElement("button");
+    startButton.setAttribute("id", `startTimer${numOfTimers}`);
+    startButton.setAttribute("onclick", `startTimer(${numOfTimers})`);
+    startButton.setAttribute("class", "timerButton");
+    startButton.textContent = "Start";
+    timerButtons.appendChild(startButton);
+
+    // Create a new delete button
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("id", `deleteTimer${numOfTimers}`);
+    deleteButton.setAttribute("onclick", `deleteTimer(${numOfTimers})`);
+    deleteButton.setAttribute("class", "timerButton");
+    deleteButton.textContent = "Delete";
+    timerButtons.appendChild(deleteButton);
+
+    numOfTimers++;
+}
+
+function startTimer(timerIndex) {
+    // Kill start button after starting timer
+    document.getElementById(`startTimer${timerIndex}`).remove();
+    // Kill delete button after starting timer, restore it later to maintain order
+    document.getElementById(`deleteTimer${timerIndex}`).remove();
+
+    // Set initial conditions
+
     // Prevent previous internval from affecting new timer
     clearInterval(intervalID);
     let seconds = 0;
@@ -221,10 +219,10 @@ function resumeTimer(timerIndex) {
 function resetTimer(timerIndex) {
     console.log("Resetting timer... timer"+timerIndex);
     clearInterval(intervalID);
-    document.getElementById(`hoursColon${timerIndex}`)?.remove();
-    document.getElementById(`minutesColon${timerIndex}`)?.remove();
-    document.getElementById(`hours${timerIndex}`).remove();
-    document.getElementById(`minutes${timerIndex}`).remove();
+    document.getElementById(`hoursColon${timerIndex}`).textContent = "";
+    document.getElementById(`minutesColon${timerIndex}`).textContent = "";
+    document.getElementById(`hours${timerIndex}`).textContent = "";
+    document.getElementById(`minutes${timerIndex}`).textContent = "";
     const secondsPara = document.getElementById(`seconds${timerIndex}`);
     secondsPara.textContent = "0";
     
